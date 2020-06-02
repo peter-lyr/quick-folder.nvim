@@ -2,7 +2,7 @@
 py3 import os, vim; vim.command(f'let g:sep = "{os.path.sep}"')
 let g:path_home_directory = expand('~') .g:sep
 
-let g:quick_folder = {'home': [''], 'desktop': ['']}
+let b:my_quick_folder = {'home': [''], 'desktop': ['']}
 
 function! OpenSide(folder)
     let path = expand('%:p')
@@ -23,6 +23,9 @@ function! s:get_n(i)
 endfunction
 
 function! MapChangeFolder()
+    if !exists('g:quick_folder')
+        let g:quick_folder = b:my_quick_folder
+    endif
     for i in g:quick_folder.home
         let n = s:get_n(i)
         exec 'nnoremap ch' .n ' :call OpenSide("' .g:path_home_directory .i .'")<cr>'
@@ -33,4 +36,4 @@ function! MapChangeFolder()
     endfor
 endfunction
 
-call MapChangeFolder()
+autocmd BufWinEnter * :call MapChangeFolder()
