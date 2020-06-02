@@ -49,5 +49,5 @@ function! ViewChangeFolder()
     endfor
 endfunction
 
-autocmd BufWinEnter * :call MapChangeFolder()
+autocmd VimEnter * :call MapChangeFolder()
 command! ViewChangeFolder call ViewChangeFolder()
