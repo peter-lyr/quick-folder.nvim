@@ -32,8 +32,22 @@ function! MapChangeFolder()
     endfor
     for i in g:quick_folder.desktop
         let n = s:get_n(i)
-        exec 'nnoremap cd' .n ' :call OpenSide("' .g:path_home_directory .'Desktop/' .i .'")<cr>'
+        exec 'nnoremap cd' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'")<cr>'
+    endfor
+endfunction
+
+function! ViewChangeFolder()
+    ec "The quick folders:"
+    let c = 1
+    for i in g:quick_folder.home
+        ec c .'. ' .g:path_home_directory .i
+        let c = c + 1
+    endfor
+    for i in g:quick_folder.home
+        ec c .'. ' .g:path_home_directory . 'Desktop' .g:sep .i
+        let c = c + 1
     endfor
 endfunction
 
 autocmd BufWinEnter * :call MapChangeFolder()
+command! ViewChangeFolder call ViewChangeFolder()
