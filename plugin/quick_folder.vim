@@ -4,9 +4,8 @@ let g:path_home_directory = expand('~') .g:sep
 
 let b:my_quick_folder = {'home': [''], 'desktop': ['']}
 
-function! OpenSide(folder)
-    let path = expand('%:p')
-    if len(path) > 0
+function! OpenSide(folder, mode)
+    if and(a:mode == 't', len(expand('%:p')) > 0)
         exec 'tabnew'
     endif
     exec 'cd ' .a:folder
@@ -28,11 +27,13 @@ function! MapChangeFolder()
     endif
     for i in g:quick_folder.home
         let n = s:get_n(i)
-        exec 'nnoremap ch' .n ' :call OpenSide("' .g:path_home_directory .i .'")<cr>'
+        exec 'nnoremap ch' .n ' :call OpenSide("' .g:path_home_directory .i .'", "b")<cr>'
+        exec 'nnoremap cH' .n ' :call OpenSide("' .g:path_home_directory .i .'", "t")<cr>'
     endfor
     for i in g:quick_folder.desktop
         let n = s:get_n(i)
-        exec 'nnoremap cd' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'")<cr>'
+        exec 'nnoremap cd' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'", "b")<cr>'
+        exec 'nnoremap cD' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'", "t")<cr>'
     endfor
 endfunction
 
