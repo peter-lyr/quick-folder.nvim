@@ -9,6 +9,9 @@ function! OpenSide(folder, mode)
         exec 'tabnew'
     endif
     exec 'cd ' .a:folder
+    if expand('%')[0:5] == '[defx]'
+        exec "Defx"
+    endif
     exec "Defx `'" .a:folder ."'`"
 endfunction
 
