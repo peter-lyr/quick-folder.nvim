@@ -9,7 +9,7 @@ function! OpenSide(folder, mode)
         exec 'tabnew'
     endif
     exec 'cd ' .a:folder
-    exec "Defx `expand('%:p:h')` -search=`expand('%:p')`"
+    exec "Defx `'" .a:folder ."'`"
 endfunction
 
 function! s:get_n(i)
