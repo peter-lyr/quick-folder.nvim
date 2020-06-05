@@ -30,13 +30,13 @@ function! MapChangeFolder()
     endif
     for i in g:quick_folder.home
         let n = s:get_n(i)
-        exec 'nnoremap ch' .n ' :call OpenSide("' .g:path_home_directory .i .'", "b")<cr>'
-        exec 'nnoremap cH' .n ' :call OpenSide("' .g:path_home_directory .i .'", "t")<cr>'
+        exec 'nnoremap <silent> ch' .n ' :call OpenSide("' .g:path_home_directory .i .'", "b")<cr>'
+        exec 'nnoremap <silent> cH' .n ' :call OpenSide("' .g:path_home_directory .i .'", "t")<cr>'
     endfor
     for i in g:quick_folder.desktop
         let n = s:get_n(i)
-        exec 'nnoremap cd' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'", "b")<cr>'
-        exec 'nnoremap cD' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'", "t")<cr>'
+        exec 'nnoremap <silent> cd' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'", "b")<cr>'
+        exec 'nnoremap <silent> cD' .n ' :call OpenSide("' .g:path_home_directory .'Desktop' .g:sep .i .'", "t")<cr>'
     endfor
 endfunction
 
