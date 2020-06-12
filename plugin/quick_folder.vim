@@ -24,7 +24,7 @@ endfunction
 function! s:get_n(i)
     let fs = split(a:i, g:sep)
     if len(fs) == 0
-        return g:sep
+        return '/'
     else
         return trim(fs[len(fs)-1], '.')[0:1]
     endif
