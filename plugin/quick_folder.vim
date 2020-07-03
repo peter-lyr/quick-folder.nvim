@@ -1,6 +1,10 @@
 py3 import os, vim; vim.command(f"let g:sep = '{os.path.sep}'")
 let g:home_root = expand('~') .g:sep
 
+if !exists('g:desktop')
+    let g:desktop = g:home_root .'Desktop'
+endif
+
 let b:my_quick_folder = {'home': [''], 'desktop': ['']}
 
 "转义单双引号
@@ -18,6 +22,9 @@ function! OpenSide(folder, mode)
     if expand('%')[0:5] == '[defx]'
         exec "Defx"
     endif
+    exec "Defx"
+    exec "bw!"
+    exec "cd " .a:folder
     exec "Defx `'" .a:folder ."'`"
 endfunction
 
@@ -36,6 +43,7 @@ function! MapChangeFolder()
     endif
     let patt = '\'
     for i in g:quick_folder.home
+        let i = substitute(i, '[/\\]', g:sep, 'g')
         let n = s:get_n(i)
         exec s:escape('nnoremap <silent> ch' .n .' :call OpenSide("' .g:home_root .i .'", "b")<cr>', patt)
         exec s:escape('nnoremap <silent> cH' .n .' :call OpenSide("' .g:home_root .i .'", "t")<cr>', patt)
@@ -43,9 +51,10 @@ function! MapChangeFolder()
         "return
     endfor
     for i in g:quick_folder.desktop
+        let i = substitute(i, '[/\\]', g:sep, 'g')
         let n = s:get_n(i)
-        exec s:escape('nnoremap <silent> cd' .n .' :call OpenSide("' .g:home_root .'Desktop' .g:sep .i .'", "b")<cr>', patt)
-        exec s:escape('nnoremap <silent> cD' .n .' :call OpenSide("' .g:home_root .'Desktop' .g:sep .i .'", "t")<cr>', patt)
+        exec s:escape('nnoremap <silent> cd' .n .' :call OpenSide("' .g:desktop .g:sep .i .'", "b")<cr>', patt)
+        exec s:escape('nnoremap <silent> cD' .n .' :call OpenSide("' .g:desktop .g:sep .i .'", "t")<cr>', patt)
     endfor
 endfunction
 
