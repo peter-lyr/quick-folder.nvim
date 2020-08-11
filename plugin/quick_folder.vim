@@ -33,7 +33,7 @@ function! s:get_n(i)
     if len(fs) == 0
         return '/'
     else
-        return trim(fs[len(fs)-1], '.')[0:1]
+        return tolower(trim(fs[len(fs)-1], '.')[0:1])
     endif
 endfunction
 
